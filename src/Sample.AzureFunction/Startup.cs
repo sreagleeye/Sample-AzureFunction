@@ -24,7 +24,11 @@ namespace Sample.AzureFunction
                         cfg.AddConsumersFromNamespaceContaining<ConsumerNamespace>();
                         cfg.AddRequestClient<SubmitOrder>(new Uri("queue:submit-order"));
                     },
-                    "AzureWebJobsServiceBus")
+                    "AzureWebJobsServiceBus",
+                    (context, cfg) =>
+                    {
+                        cfg.AutoStart = true;
+                    })
                 .AddMassTransitEventHub();
         }
     }
